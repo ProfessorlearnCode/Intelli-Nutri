@@ -11,29 +11,26 @@ Intelligent Nutri is a personalized AI-driven platform that helps users find rec
 ```bash
 intelligent-nutri/
 │
-├── frontend/           # HTML/CSS/JS/Bootstrap frontend
+├── frontend/               # All UI code here
 │   ├── index.html
 │   ├── preferences.html
 │   ├── chatbot.html
-│   └── assets/
-│       ├── css/
-│       └── js/
+│   └── js/
+│       ├── app.js          # JS for preferences form & search
+│       └── chatbot.js      # JS for AI chat interface
 │
-├── backend/            # Flask backend API
-│   ├── app/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── models/
-│   ├── config.py
-│   └── run.py
+├── backend/                # All Flask-related backend code
+│   ├── main.py             # Entry point — define routes here
+│   ├── llm_utils.py        # Functions to generate prompts & call Gemini/OpenAI
+│   ├── db_utils.py         # Functions to interact with SQLite (CRUD)
+│   └── vector_utils.py     # Handle FAISS search & embeddings
 │
-├── database/           # SQLite schema & vector DB setup
-│   ├── schema.sql
-│   ├── init_db.py
-│   └── seed_data.py
+├── database/
+│   ├── schema.sql          # Create tables
+│   ├── init_db.py          # Script to create and initialize database
+│   └── seed_data.py        # Preload recipes from dataset (Kaggle, etc.)
 │
-├── requirements.txt    # Python dependencies
-└── README.md           # You are here
+└── requirements.txt
 ```
 
 ---
