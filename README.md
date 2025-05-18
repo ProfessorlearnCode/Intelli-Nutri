@@ -18,6 +18,8 @@ intelligent-nutri/
 │   └── js/
 │       ├── app.js          # JS for preferences form & search
 │       └── chatbot.js      # JS for AI chat interface
+│   └── css/
+│       └── style.css      
 │
 ├── backend/                # All Flask-related backend code
 │   ├── main.py             # Entry point — define routes here
