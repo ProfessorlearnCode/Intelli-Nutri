@@ -8,3 +8,7 @@ Define all main routes here:
 
 Other files like llm_utils.py or db_utils.py will be imported and used here.
 """
+
+
+
+print("hello World 🌍")
