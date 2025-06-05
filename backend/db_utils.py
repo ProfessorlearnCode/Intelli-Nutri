@@ -68,8 +68,3 @@ def fetch_tables():
     else:
         print("[ERROR 🔴] Error occurred while connecting to the DB for fetching tables.")
         return []
-
-if __name__ == "__main__":
-    print(fetch_tables())
-    print(fetch_recipes_by_id([1, 3, 5]))
-    print(fetch_user_prefs(1))
