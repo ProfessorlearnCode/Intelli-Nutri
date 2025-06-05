@@ -56,6 +56,18 @@ def fetch_recipes_by_id(ids):
         print("[ERROR 🔴] Error occurred while connecting to the DB for fetching recipes by ID.")
         return []
 
+def fetch_recipes_for_indexing():
+    status, connect_obj = build_connection()
+    if status:
+        query = f"SELECT recipeid, recipename FROM recipes"
+        rows = connect_obj.execute(query).fetchall()
+        connect_obj.close()
+        return [dict(row) for row in rows]
+    else:
+        print("[ERROR 🔴] Error occurred while connecting to the DB for fetching recipes for indexing.")
+        return []
+
+
 def fetch_tables():
     status, connect_obj = build_connection()
     if status == 1:

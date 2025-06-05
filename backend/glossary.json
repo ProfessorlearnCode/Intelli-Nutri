@@ -1,0 +1,46 @@
+{
+  "masoor": ["red lentils", "lentils", "protein", "vegetarian"],
+  "moong": ["yellow lentils", "mung beans", "lentils", "protein", "dal"],
+  "urad": ["black lentils", "urad daal", "dal makhani", "protein-rich"],
+  "chana": ["chickpeas", "garbanzo beans", "protein", "kabuli chana", "chole"],
+  "rajma": ["kidney beans", "north indian curry", "protein", "red beans"],
+
+  "roti": ["flatbread", "chapati", "bread", "wheat roti"],
+  "paratha": ["stuffed flatbread", "crispy bread", "tawa bread"],
+  "naan": ["tandoor bread", "leavened flatbread", "restaurant-style bread"],
+  "biryani": ["layered rice dish", "masala rice", "rice with meat or veg", "fragrant rice", "spiced rice"],
+  "pulao": ["mild rice dish", "vegetable rice", "one pot rice"],
+
+  "chaat": ["street food", "snack", "spicy and tangy", "crispy savory snack"],
+  "tikki": ["potato cutlet", "spicy patty", "aloo snack"],
+  "pakora": ["fried fritters", "onion bhaji", "gram flour snack"],
+  "samosa": ["stuffed pastry", "fried triangle snack", "spiced potato pastry"],
+
+  "tadka": ["tempered spices", "infused oil", "ghee fry", "mustard cumin fry"],
+  "bhuna": ["slow cooked", "roasted masala", "dry saute", "intense flavor"],
+  "dum": ["slow cooked in steam", "sealed cooking", "dum biryani"],
+  "tandoori": ["charred", "grilled", "oven roasted", "smoky flavor"],
+  "masala": ["spices", "spice mix", "garam masala", "curry base"],
+
+  "raita": ["yogurt dip", "cooling side", "curd salad", "dahi condiment"],
+  "chutney": ["dip", "herb sauce", "tamarind sauce", "mint dip", "side condiment"],
+  "achar": ["pickle", "spicy preserved vegetable", "tangy side"],
+
+  "paneer": ["indian cottage cheese", "vegetarian protein", "cheese cubes"],
+  "tofu": ["soy paneer", "vegan protein", "plant-based paneer"],
+  "dal": ["lentil curry", "stewed lentils", "vegan protein", "comfort food"],
+  "sabzi": ["vegetable dish", "stir fry veg", "dry curry", "home style curry"],
+
+  "halwa": ["sweet dish", "semolina dessert", "carrot pudding", "dessert"],
+  "kheer": ["rice pudding", "milk dessert", "sweet rice", "festive dessert"],
+  "ladoo": ["sweet balls", "boondi sweet", "festival treat"],
+  "barfi": ["milk sweet", "dessert fudge", "sweet cubes"],
+
+  "mutton": ["goat meat", "red meat curry", "non-veg", "protein-rich"],
+  "chicken": ["poultry", "meat", "non-veg protein"],
+  "keema": ["minced meat", "ground meat", "masala meat"],
+  "egg": ["anda", "protein", "omelet", "boiled egg"],
+
+  "veg": ["vegetarian", "plant-based", "no meat"],
+  "nonveg": ["non-vegetarian", "includes meat", "protein-rich", "animal-based"]
+}
