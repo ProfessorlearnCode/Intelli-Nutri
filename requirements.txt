@@ -4,3 +4,4 @@ transformers=4.52.4
 faiss-cpu=1.11.0 
 sentence-transformers==4.1.0
 numpy==2.2.4
+flask-cors==6.0.0
