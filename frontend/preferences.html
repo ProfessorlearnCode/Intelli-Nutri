@@ -1,24 +1,91 @@
-<!--
-Preferences.html - User Onboarding Form
-- Contains fields for:
-    - Dietary preferences (vegan, keto, etc.)
-    - Allergies
-    - Favorite cuisines
-    - Health goals (e.g., weight loss, muscle gain)
-- On submission, this data will be POSTed to the backend via assets/js/app.js.
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Reference the style to assets/css -->
-    <title>Preferences/title>
+  <meta charset="UTF-8">
+  <title>AI Recipe Generator - Food Preferences</title>
+  <link rel="stylesheet" href="/frontend/assests/css/style.css">
 </head>
 <body>
-    <!-- The code for the Preferences Form goes here -->
+   <div class="nav-container">
+      <h1>🥗 Intelli-Nutri</h1>
+    </div>
+
+  <h2>🍲 Intelli-Nutri - Food & Health Preferences</h2>
+
+  <form id="recipeForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="tabassum" required>
+    <label for="age">Your Age:</label>
+    <input type="number" id="age" name="age" placeholder="e.g.0-100" required>
+
+    <label for="diet">Dietary Preference:</label>
+    <select id="diet" name="diet" required>
+      <option value="">-- Select Diet --</option>
+      <option value="vegetarian">Vegetarian</option>
+      <option value="vegan">Non Vegetarian</option>
+      <option value="no-restriction">No Restriction</option>
+    </select>
+
+    <label for="disease" >Health Conditions:</label>
+    <select id="disease" name="disease" required>
+      <option value="">-- Select Condition --</option>
+      <option value="none">None</option>
+      <option value="diabetes">Diabetes</option>
+      <option value="hypertension">Hypertension</option>
+      <option value="high-cholesterol">High Cholesterol</option>
+      <option value="thyroid">Thyroid Issues</option>
+    </select>
+
+    <label for="ingredients">Likes:</label>
+    <textarea id="likes" name="ingredients" rows="3" placeholder="e.g. Chicken, Broccoli, Rice" required></textarea>
+
+    <label for="ingredients">Dislikes:</label>
+    <textarea id="dislikes" name="ingredients" rows="3" placeholder="e.g. Chicken, Broccoli, Rice" required></textarea>
+
+    <label for="avoid">Allergies:</label>
+    <textarea id="avoid" name="avoid" rows="3" placeholder="e.g. Nuts,eggs, Dairy, Sugar" required></textarea>
+      <button id="submit" type="submit">Generate Recipe </button>
+  </form>
+
 </body>
-    <!-- Reference the script to assets/js -->
+
+<script>
+  document.getElementById("recipeForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // ✅ Fix: Use correct ID for name field
+    const name = document.getElementById("name").value;
+
+    // Store in localStorage separately
+    localStorage.setItem("userName", name);
+
+    // Collect other form data
+    const age = document.getElementById("age").value;
+    const diet = document.getElementById("diet").value;
+    const disease = document.getElementById("disease").value;
+    const likes = document.getElementById("likes").value;
+    const dislikes = document.getElementById("dislikes").value;
+    const avoid = document.getElementById("avoid").value;
+
+    // Combine into preferences object
+    const preferences = {
+      name,
+      age,
+      diet,
+      disease,
+      likes,
+      dislikes,
+      avoid
+    };
+
+    // Save full object in localStorage
+    localStorage.setItem("userPreferences", JSON.stringify(preferences));
+
+    // Redirect to chatbot page
+    window.location.href = "index.html"; // or "Chatbot.html" if that's your chatbot page
+  });
+</script>
+
+
 </html>
+

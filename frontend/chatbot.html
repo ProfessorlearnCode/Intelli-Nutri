@@ -1,23 +1,46 @@
-<!--
-Chatbot.html - Chat Interface with AI Chef
-- Basic chat layout with:
-    - Text input box
-    - Chat display area
-    - Send button
-- Connects to assets/js/chatbot.js which handles sending messages to the backend and displaying responses.
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Reference the style to assets/css -->
-    <title>Chatbot</title>
+  <meta charset="UTF-8">
+  <title>AI Food Chatbot</title>
+  <link rel="stylesheet" href="/frontend/assests/css/style.css">
+  <script src="/frontend/assests/js/chatbot.js"></script>
 </head>
 <body>
-    <!-- The code for the Chatbot UI goes here -->
-</body>
-    <!-- Reference the script to assets/js -->
-</html>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <div class="nav-container">
+      <h1>🥗 Intelli-Nutri</h1>
+      <ul>
+        <li><a href="/Frontend/index.html">Home</a></li>
+        <li><a href="/Frontend/Chatbot.html" class="active">Talk To Chef</a></li>
+        <!-- <li><a href="/Frontend/mainpage.html">Preference Form</a></li> -->
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Chatbot Section -->
+  <section class="chatbot-section">
+    <div class="container">
+      <h2>🤖 Chat with Your AI Recipe Assistant</h2>
+      <p>Ask anything related to your diet, cooking tips, or recipe suggestions!</p>
+      <h3 id="greeting"></h3>
+
+      <div class="chatbox">
+
+        <div class="chat-window" id="chat-window">
+          <div class="message bot">Hi! I'm your AI Recipe Assistant. How can I help you today?</div>
+        </div>
+        <form id="chat-form">
+          <input type="text" id="user-input" placeholder="Type your message..." required>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AI Food Generator | Built with 🧠 + 🍲</p>
+  </footer>
