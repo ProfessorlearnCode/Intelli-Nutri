@@ -1,11 +1,81 @@
-/*
-app.js - Handles Preferences & Recipe Search Logic
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", function () {
 
-Includes:
-1. Form submission logic (from preferences.html):
-   - Collect user input and send POST request to backend (/save_preferences).
-2. Recipe search:
-   - Capture user search input
-   - Send GET/POST request to backend (/get_recipes)
-   - Display search results dynamically on the page
-*/
+  /* -------------------------
+     1. Homepage Recipe Filter
+  -------------------------- */
+  const searchInput = document.getElementById("search");
+  if (searchInput) {
+    searchInput.addEventListener("keyup", function () {
+      const input = searchInput.value.toLowerCase();
+      const cards = document.getElementsByClassName("recipe-card");
+
+      Array.from(cards).forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
+    });
+  }
+
+  /* -------------------------
+     2. Chatbot Page Logic
+  -------------------------- */
+  const chatForm = document.getElementById("chat-form");
+  const chatWindow = document.getElementById("chat-window");
+  const userInput = document.getElementById("user-input");
+
+  if (chatForm && chatWindow && userInput) {
+    chatForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage("user", message);
+
+      setTimeout(() => {
+        const botResponse = getBotResponse(message);
+        appendMessage("bot", botResponse);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }, 600);
+
+      userInput.value = "";
+    });
+
+    function appendMessage(sender, text) {
+      const messageElement = document.createElement("div");
+      messageElement.className = `message ${sender}`;
+      messageElement.textContent = text;
+      chatWindow.appendChild(messageElement);
+    }
+
+    function getBotResponse(input) {
+      const lowerInput = input.toLowerCase();
+      if (lowerInput.includes("vegan")) {
+        return "Try a Vegan Chickpea Curry or Quinoa Salad!";
+      } else if (lowerInput.includes("diabetic")) {
+        return "Low-carb Grilled Chicken or Steamed Veggie Stir Fry are great options.";
+      } else if (lowerInput.includes("breakfast")) {
+        return "How about oatmeal with berries or an egg-white omelet?";
+      } else if (lowerInput.includes("gluten")) {
+        return "Gluten-free Pasta Primavera or Brown Rice Bowls work well.";
+      } else {
+        return "Tell me more — what kind of recipe are you looking for (e.g. high protein, low carb)?";
+      }
+    }
+  }
+
+});
+document.getElementById("submit").onclick = function() {
+  window.location.href = "/Frontend/index.html";
+};
+
+function filterRecipes() {
+  const input = document.getElementById("search").value.toLowerCase();
+  const cards = document.getElementsByClassName("recipe-card");
+
+  Array.from(cards).forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(input) ? "block" : "none";
+  });
+}
