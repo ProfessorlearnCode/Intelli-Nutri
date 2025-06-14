@@ -48,7 +48,7 @@ def fetch_recipes_by_id(ids):
     status, connect_obj = build_connection()
     if status == 1:
         placeholders = ','.join('?' * len(ids))
-        query = f"SELECT * FROM recipes WHERE recipeid IN ({placeholders})"
+        query = f"SELECT * FROM recipes WHERE recipe_id IN ({placeholders})"
         rows = connect_obj.execute(query, ids).fetchall()
         connect_obj.close()
         return [dict(row) for row in rows]
@@ -59,7 +59,19 @@ def fetch_recipes_by_id(ids):
 def fetch_recipes_for_indexing():
     status, connect_obj = build_connection()
     if status:
-        query = f"SELECT recipeid, recipename FROM recipes"
+        query = f'''SELECT recipe_id,
+                            recipe_name,
+                            recipe_link,
+                            recipe_description,
+                            recipe_cooktime,
+                            recipe_ingredients,
+                            recipe_steps,
+                            recipe_course_type,
+                            recipe_difficulty,
+                            recipe_flavor_profile,
+                            recipe_tags,
+                            recipe_diet_type
+                    FROM recipes'''
         rows = connect_obj.execute(query).fetchall()
         connect_obj.close()
         return [dict(row) for row in rows]
@@ -80,3 +92,7 @@ def fetch_tables():
     else:
         print("[ERROR 🔴] Error occurred while connecting to the DB for fetching tables.")
         return []
+
+# if __name__ == "__main__":
+#     data = json.dumps(fetch_recipes_for_indexing(), indent= 4)
+#     print(data)
