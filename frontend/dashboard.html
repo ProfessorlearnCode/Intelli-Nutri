@@ -1,14 +1,66 @@
-<!-- The HTML will be published shortly! -->
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <title>AI Food Recipe Generator</title>
+  <link rel="stylesheet" href="/frontend/assets/css/style.css">
+  <script src="/frontend/assets/js/app.js"></script>
 </head>
 <body>
-    
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <h1>🥗 Intelli-Nutri</h1>
+      <ul>
+        <li><a href="/frontend/dashboard.html" class="active">Home</a></li>
+        <li><a href="/frontend/chatbot.html">Talk To Chef</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Search Bar -->
+  <section class="search-section">
+    <div class="container">
+      <input type="text" id="search" placeholder="Search recipes..." onkeyup="filterRecipes()">
+    </div>
+  </section>
+
+  <!-- Recipe Cards -->
+  <section class="recipes">
+    <div class="container" id="recipe-list">
+
+      <div class="recipe-card">
+        <h3>Chicken White Karahai</h3>
+        <p>Chicken White Karahi is a rich and creamy Pakistani dish made with chicken, yogurt, cream, and spices like black pepper and green chilies. It has a mild, aromatic flavor and a signature white gravy, served best with naan or roti.</p>
+      </div>
+
+      <div class="recipe-card">
+        <h3>Mutton Korma </h3>
+        <p>Mutton Korma is a traditional South Asian curry made with tender mutton pieces slow-cooked in a rich, aromatic gravy of yogurt, fried onions, and a blend of warm spices like cardamom, cloves, and cinnamon. It has a deep, flavorful taste and a slightly thick, oily texture, making it a popular dish for special occasions. Best served with naan or steamed rice.</p>
+      </div>
+
+      <div class="recipe-card">
+        <h3>Gola Kabab</h3>
+        <p>Gola Kabab is a soft, melt-in-the-mouth minced meat kabab, made with finely ground beef or mutton, mixed with spices, papaya paste (for tenderness), and sometimes cream. Shaped into small cylinders or balls, they are typically grilled or pan-fried. Known for their smoky aroma and rich flavor, Gola Kababs are a popular BBQ item often served with chutney and naan.
+</p>
+      </div>
+
+      <div class="recipe-card">
+        <h3>Yakhni Pulao</h3>
+        <p>Yakhni Pulao is a fragrant and flavorful rice dish made by cooking basmati rice in a rich, spiced meat broth (yakhni) prepared with mutton or chicken, whole spices, and aromatics like garlic, ginger, and onions. The result is a subtly spiced, savory pulao where the meat and rice are perfectly infused with the essence of the broth. It’s often served with raita or salad.
+</p>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AI Food Generator | Eat Smart, Live Better 🍽️</p>
+  </footer>
 </body>
 </html>
+

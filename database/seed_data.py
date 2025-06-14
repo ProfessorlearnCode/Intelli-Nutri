@@ -35,7 +35,7 @@ for row in data:
         row['name'],
         row['link'],
         row['description'],
-        int(row['cooktime']) if row['cooktime'].isdigit() else 0,
+        row['cooktime'],
         row['ingredients'],
         row['recipe_steps'],
         row['course_type'],
