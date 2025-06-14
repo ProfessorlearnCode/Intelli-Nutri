@@ -4,20 +4,18 @@
   <meta charset="UTF-8">
   <title>AI Recipe Generator - Food Preferences</title>
   <link rel="stylesheet" href="/frontend/assets/css/style.css">
-  <script src="/frontend/assets/js/app.js"></script>
+  <script src="/frontend/assets/js/app.js" defer></script>
 </head>
 <body>
    <div class="nav-container">
       <h1>🥗 Intelli-Nutri</h1>
     </div>
 
-  <!-- <h2>🍲 Intelli-Nutri - Food & Health Preferences</h2> -->
-
   <form id="recipeForm">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" placeholder="tabassum" required>
+    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
     <label for="age">Your Age:</label>
-    <input type="number" id="age" name="age" placeholder="e.g.0-100" required>
+    <input type="number" id="age" name="age" placeholder="e.g.1-100" required>
 
     <label for="diet">Dietary Preference:</label>
     <select id="diet" name="diet" required>
@@ -37,19 +35,19 @@
       <option value="thyroid">Thyroid Issues</option>
     </select>
 
-    <label for="ingredients">Likes:</label>
-    <textarea id="likes" name="ingredients" rows="3" placeholder="e.g. Chicken, Broccoli, Rice" required></textarea>
+    <label for="likes">Likes:</label>
+    <textarea id="likes" name="likes" rows="3" placeholder="e.g. Chicken, Broccoli, Rice" required></textarea>
 
-    <label for="ingredients">Dislikes:</label>
-    <textarea id="dislikes" name="ingredients" rows="3" placeholder="e.g. Chicken, Broccoli, Rice" required></textarea>
+    <label for="dislikes">Dislikes:</label>
+    <textarea id="dislikes" name="dislikes" rows="3" placeholder="e.g. Chicken, Broccoli, Rice" required></textarea>
 
     <label for="avoid">Allergies:</label>
     <textarea id="avoid" name="avoid" rows="3" placeholder="e.g. Nuts,eggs, Dairy, Sugar" required></textarea>
       <button id="submit" type="submit">Generate Recipe </button>
   </form>
 
+  <div id="toast" class="toast"></div>
+
 </body>
-
-
 </html>
 

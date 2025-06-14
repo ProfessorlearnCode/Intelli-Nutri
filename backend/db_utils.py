@@ -17,11 +17,11 @@ def save_user_prefs(preferences: dict):
         placeholders = (
             preferences.get('name'),
             preferences.get('age'),
-            preferences.get('dietary_preference'),
-            preferences.get('health_conditions'),
+            preferences.get('diet'),
+            preferences.get('disease'),
             preferences.get('likes'),
             preferences.get('dislikes'),
-            preferences.get('allergies')
+            preferences.get('avoid')
         )
 
         query = '''INSERT INTO user_preferences 

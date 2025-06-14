@@ -14,7 +14,7 @@ from flask_cors import CORS
 import db_utils as d
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="https://laughing-space-waddle-4j7wgxr5rvpwcg55-5500.app.github.dev")
 
 @app.route("/")
 def server_health():
@@ -24,17 +24,21 @@ def server_health():
 def save_preferences():
     try:
         fetch = request.get_json()
+        print("Received JSON:", fetch)
+
         preferences = fetch.get("preferences")
         if not preferences:
             return jsonify({"status" : 0,
-                            "message": "[🔴 ERROR] Error Occured while fetching the preferences - Client side"}), 400
+                            "message": "[🔴 ERROR] No preferences received"}), 400
             
         d.save_user_prefs(preferences=preferences)
+        print("[🟢 SUCCESS] preferences saved to the database")
+        
         return jsonify({"status" : 1}), 200
     except Exception as e:
+        print("Server error:", str(e)) 
         return jsonify({"status" : 0,
-                "message": "[🔴 ERROR] Error Occured while fetching and saving the preferences - Server side"}), 500
-
+                "message": "[🔴 ERROR] Exception during preferences saving"}), 500
 
 
 if __name__ == "__main__":

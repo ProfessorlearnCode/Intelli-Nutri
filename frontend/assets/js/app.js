@@ -1,8 +1,21 @@
-// Wait for the DOM to load
-document.addEventListener("DOMContentLoaded", function () {
+  function showToast(message, duration = 3000) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, duration);
+}
+
+  
+  
+  
+  
   /* -------------------------
      1. Homepage Recipe Filter
   -------------------------- */
+  document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById("search");
   if (searchInput) {
     searchInput.addEventListener("keyup", function () {
@@ -15,36 +28,68 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+});
 
-  /* -------------------------
-     2. Preferences Page Logic
-  -------------------------- */
-  const recipeForm = document.getElementById("recipeForm");
-  if (recipeForm) {
-    recipeForm.addEventListener("submit", function (event) {
-      event.preventDefault();
 
-      const name = document.getElementById("name")?.value || "";
-      localStorage.setItem("userName", name);
+// -------------------------
+// 2. Preferences Page Logic
+// -------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('recipeForm');
+  const submitBtn = document.getElementById('submit');
 
-      const preferences = {
-        name,
-        age: document.getElementById("age")?.value || "",
-        diet: document.getElementById("diet")?.value || "",
-        disease: document.getElementById("disease")?.value || "",
-        likes: document.getElementById("likes")?.value || "",
-        dislikes: document.getElementById("dislikes")?.value || "",
-        avoid: document.getElementById("avoid")?.value || ""
-      };
+  if (!form || !submitBtn) return;
 
-      localStorage.setItem("userPreferences", JSON.stringify(preferences));
-      window.location.href = "index.html";
-    });
-  }
+  let hasSubmitted = false;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (hasSubmitted) return;
+    hasSubmitted = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    const preferences = {
+      name: form.name.value.trim(),
+      age: form.age.value,
+      diet: form.diet.value,
+      disease: form.disease.value,
+      likes: form.likes.value.trim(),
+      dislikes: form.dislikes.value.trim(),
+      avoid: form.avoid.value.trim()
+    };
+
+    try {
+      const response = await fetch('https://laughing-space-waddle-4j7wgxr5rvpwcg55-5000.app.github.dev/save_preferences', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ preferences })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+
+      localStorage.setItem('username', preferences.name);
+      
+      showToast('✅ Preferences saved successfully!');
+      setTimeout(() => {
+        window.location.href = '/frontend/dashboard.html';
+      }, 1500);
+    } catch (err) {
+      console.error('Submission error:', err.message);
+      showToast('❌ Could not save preferences. Try again.');
+      hasSubmitted = false;
+      submitBtn.disabled = false;
+    }
+  });
+});
 
   /* -------------------------
      3. Dashboard Page Logic
   -------------------------- */
+  document.addEventListener('DOMContentLoaded', function () {
   const recipeList = document.getElementById("recipe-list");
   if (recipeList) {
     fetch("data.json")
@@ -62,64 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
           recipeList.appendChild(card);
         });
       })
-      .catch(error => console.error("Error loading recipes:", error));
-  }
-
-  /* -------------------------
-     4. Chatbot Page Logic
-  -------------------------- */
-  const chatForm = document.getElementById("chat-form");
-  const chatWindow = document.getElementById("chat-window");
-  const userInput = document.getElementById("user-input");
-
-  if (chatForm && chatWindow && userInput) {
-    chatForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const message = userInput.value.trim();
-      if (!message) return;
-
-      appendMessage("user", message);
-
-      setTimeout(() => {
-        const botResponse = getBotResponse(message);
-        appendMessage("bot", botResponse);
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-      }, 600);
-
-      userInput.value = "";
-    });
-
-    function appendMessage(sender, text) {
-      const messageElement = document.createElement("div");
-      messageElement.className = `message ${sender}`;
-      messageElement.textContent = text;
-      chatWindow.appendChild(messageElement);
-    }
-
-    function getBotResponse(input) {
-      const lowerInput = input.toLowerCase();
-      if (lowerInput.includes("vegan")) {
-        return "Try a Vegan Chickpea Curry or Quinoa Salad!";
-      } else if (lowerInput.includes("diabetic")) {
-        return "Low-carb Grilled Chicken or Steamed Veggie Stir Fry are great options.";
-      } else if (lowerInput.includes("breakfast")) {
-        return "How about oatmeal with berries or an egg-white omelet?";
-      } else if (lowerInput.includes("gluten")) {
-        return "Gluten-free Pasta Primavera or Brown Rice Bowls work well.";
-      } else {
-        return "Tell me more — what kind of recipe are you looking for (e.g. high protein, low carb)?";
-      }
-    }
-  }
-
-  /* -------------------------
-     5. Redirect Button (If Exists)
-  -------------------------- */
-  const submitBtn = document.getElementById("submit");
-  if (submitBtn) {
-    submitBtn.onclick = function () {
-      window.location.href = "/Frontend/index.html";
-    };
   }
 });
+
+
+
