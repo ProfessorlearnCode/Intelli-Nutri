@@ -43,13 +43,18 @@ CREATE TABLE IF NOT EXISTS user_preferences (
 
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS recipes (
-    recipeid INTEGER PRIMARY KEY,
-    recipename TEXT,
-    ingredients TEXT,
-    description TEXT,
-    diet_type TEXT,
+    recipe_id INTEGER PRIMARY KEY,
+    recipe_name TEXT,
+    recipe_link TEXT,
+    recipe_description TEXT,
+    recipe_cooktime INTEGER,
+    recipe_ingredients TEXT,
     recipe_steps TEXT,
-    totaltime INTEGER
+    recipe_course_type TEXT,
+    recipe_difficulty INTEGER,
+    recipe_flavor_profile TEXT,
+    recipe_tags TEXT,
+    recipe_diet_type TEXT
 )
 ''')
 

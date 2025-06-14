@@ -1,23 +1,10 @@
-"""
-seed_data.py - Load Recipes into the Database
-
-- Load recipes from Kaggle dataset / Spoonacular API / custom CSV
-- Populate the recipes table in SQLite
-- Optionally, embed recipes and build FAISS index in vector_utils
-
-Run this after `init_db.py` is complete.
-"""
-
-
-#Recipes.cs
-
 import os
 import csv
 import sqlite3
 
 # 📂 Paths
 base_dir = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(base_dir, 'Recipes.csv')
+csv_path = os.path.join(base_dir, 'recipes.csv')
 db_path = os.path.join(base_dir, 'schema', 'app.db')
 
 # 📥 Read CSV using csv module
@@ -31,15 +18,31 @@ cursor = conn.cursor()
 
 for row in data:
     cursor.execute("""
-        INSERT INTO recipes (recipename, ingredients, description, diet_type, recipe_steps, totaltime)
-        VALUES (?, ?, ?, ?, ?, ?)
+                    INSERT INTO recipes (recipe_name,
+                                        recipe_link,
+                                        recipe_description,
+                                        recipe_cooktime,
+                                        recipe_ingredients,
+                                        recipe_steps,
+                                        recipe_course_type,
+                                        recipe_difficulty,
+                                        recipe_flavor_profile,
+                                        recipe_tags,
+                                        recipe_diet_type) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        
     """, (
-        row['recipename'],
-        row['ingredients'],
+        row['name'],
+        row['link'],
         row['description'],
-        row['diet_type'],
+        int(row['cooktime']) if row['cooktime'].isdigit() else 0,
+        row['ingredients'],
         row['recipe_steps'],
-        int(row['totaltime']) if row['totaltime'].isdigit() else 0  # handles non-numeric values safely
+        row['course_type'],
+        row['difficulty'],
+        row['flavor_profile'],
+        row['tags'],
+        row['diet_type']
     ))
 
 conn.commit()
