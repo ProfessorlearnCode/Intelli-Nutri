@@ -41,5 +41,20 @@ def save_preferences():
                 "message": "[🔴 ERROR] Exception during preferences saving"}), 500
 
 
+@app.route("/recipes_load")
+def recipes_load():
+    try:
+        recipes = d.fetch_recipes_for_indexing()
+        print("[🟢 SUCCESS] Recipes fetched from the database")
+        
+        # Return the plain list
+        return jsonify(recipes), 200
+    except Exception as e:
+        print("Server error:", str(e)) 
+        return jsonify({
+            "status": 0,
+            "message": "[🔴 ERROR] Exception during recipe loading"
+        }), 500
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

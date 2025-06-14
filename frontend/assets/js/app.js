@@ -8,10 +8,6 @@
   }, duration);
 }
 
-  
-  
-  
-  
   /* -------------------------
      1. Homepage Recipe Filter
   -------------------------- */
@@ -31,9 +27,9 @@
 });
 
 
-// -------------------------
-// 2. Preferences Page Logic
-// -------------------------
+  /*  -----------------------
+      2. Preferences Page Logic
+  ------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('recipeForm');
   const submitBtn = document.getElementById('submit');
@@ -89,26 +85,66 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -------------------------
      3. Dashboard Page Logic
   -------------------------- */
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   const recipeList = document.getElementById("recipe-list");
-  if (recipeList) {
-    fetch("data.json")
-      .then(response => response.json())
-      .then(recipes => {
-        recipes.forEach(recipe => {
-          const card = document.createElement("div");
-          card.className = "recipe-card";
-          card.innerHTML = `
-            <h3>${recipe.name}</h3>
-            <p><strong>Calories:</strong> ${recipe.calories}</p>
-            <p><strong>Ingredients:</strong> ${recipe.ingredients.join(", ")}</p>
-            <p>${recipe.description}</p>
+  const modal = document.getElementById("recipe-modal");
+  const modalContent = document.getElementById("modal-content");
+  const modalClose = document.getElementById("modal-close");
+
+  if (!recipeList || !modal || !modalContent || !modalClose) return;
+
+  fetch("https://laughing-space-waddle-4j7wgxr5rvpwcg55-5000.app.github.dev/recipes_load")
+    .then(response => response.json())
+    .then(recipes => {
+      if (!recipes.length) {
+        recipeList.innerHTML = "<p>No recipes found.</p>";
+        return;
+      }
+
+      recipes.forEach(recipe => {
+        const card = document.createElement("div");
+        card.className = "recipe-card";
+        card.innerHTML = `
+          <h3>${recipe.recipe_name}</h3>
+          <p><strong>Description:</strong> ${recipe.recipe_description}</p>
+          <p><strong>Cook Time:</strong> ${recipe.recipe_cooktime}</p>
+          <p><strong>Diet Type:</strong> ${recipe.recipe_diet_type}</p>
+          <p><strong>Course:</strong> ${recipe.recipe_course_type}</p>
+          <p><strong>Flavor Profile:</strong> ${recipe.recipe_flavor_profile}</p>
+          <p><strong>Tags:</strong> ${recipe.recipe_tags}</p>
+        `;
+
+        // Click to open modal
+        card.addEventListener('click', () => {
+          const ingredients = recipe.recipe_ingredients.split("|");
+          const steps = recipe.recipe_steps.split("|")
+          modalContent.innerHTML = `
+                        
+            <p><strong>Ingredients:</strong></p>
+            <ul>
+              ${ingredients.map(ingredient => `<li>${ingredient.trim()}</li>`).join("")}
+            </ul>
+                        
+            <p><strong>Steps:</strong></p>
+            <ul>
+              ${steps.map(ingredient => `<li>${ingredient.trim()}</li>`).join("")}
+            </ul>
           `;
-          recipeList.appendChild(card);
+          modal.style.display = "block";
         });
-      })
-  }
+
+        recipeList.appendChild(card);
+      });
+    });
+
+  modalClose.addEventListener('click', () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 });
-
-
 

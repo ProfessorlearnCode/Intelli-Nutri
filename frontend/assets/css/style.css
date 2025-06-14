@@ -27,25 +27,6 @@ body::before {
   animation: float 20s ease-in-out infinite;
 }
 
-/* Additional food icons overlay */
-body::after {
-  content: '🍎 🥕 🍅 🥬 🧄 🧅 🌶️ 🥒 🍋 🥑 🍇 🫐 🍓 🥝 🍊 🍌 🥭 🍑 🍒 🥥 🌽 🥔 🍠 🥜 🌰 🍞 🥖 🥨 🧀 🥚 🥓 🍗 🍖 🐟 🦐 🦀 🍄 🥦 🥬 🥒 🌶️ 🫑 🧄 🧅 🥕 🌽 🥔 🍠 🥐 🥯 🍞 🥖 🥨 🧀 🥚 🍳 🥓 🥞 🧇 🥘 🍲 🥗 🍿 🧈 🥛 🍵 ☕ 🧃 🥤 🧋 🍶 🍺 🍻 🥂 🍷 🥃 🍸 🍹 🧉 🍾 🧊 🥄 🍴 🥢';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  font-size: 20px;
-  line-height: 80px;
-  letter-spacing: 40px;
-  opacity: 0.03;
-  z-index: -1;
-  animation: drift 30s linear infinite;
-  pointer-events: none;
-  word-wrap: break-word;
-  overflow: hidden;
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -122,7 +103,12 @@ body::after {
   padding: 30px;
   position: relative;
   z-index: 5;
+  max-width: 1200px;  /* prevent overflow */
+  margin: 0 auto;
+  overflow-x: hidden;  /* prevent right-edge bleed */
 }
+
+
 
 .recipe-card {
   background-color: rgba(255, 255, 255, 0.95);
@@ -280,7 +266,7 @@ footer {
   text-align: center;
   color: #795548;
   border-top: 3px solid #ffb74d;
-  position: relative;
+  position: absolute;
   z-index: 5;
   backdrop-filter: blur(5px);
   font-weight: 500;
@@ -407,4 +393,50 @@ footer {
   visibility: visible;
   opacity: 1;
   bottom: 50px;
+}
+/* Modal Base */
+.modal {
+  z-index: 9999; /* move it above everything else */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  overflow: auto;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  width: 70%;
+  border-radius: 10px;
+  z-index: 10000;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 60px;
+  color: #aaa;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }

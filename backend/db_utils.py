@@ -79,7 +79,6 @@ def fetch_recipes_for_indexing():
         print("[ERROR 🔴] Error occurred while connecting to the DB for fetching recipes for indexing.")
         return []
 
-
 def fetch_tables():
     status, connect_obj = build_connection()
     if status == 1:
