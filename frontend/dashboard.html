@@ -20,17 +20,29 @@
     </div>
   </nav>
 
-  <!-- Search Bar -->
-  <section class="search-section">
+<!-- Search Bar -->
+<section class="search-section">
+  <div class="container">
+    <input type="text" id="search" placeholder="Search recipes...">
+    
+    <select id="searchMode">
+      <option value="simple">Simple</option>
+      <option value="semantic">Smart</option>
+    </select>
+  </div>
+</section>
+
+
+  <!-- Recipe Cards -->
+
+
+  <section class="recipes">
     <div class="container">
-      <input type="text" id="search" placeholder="Search recipes..." onkeyup="filterRecipes()">
+      <div id="loader" class="spinner" style="display: none;"></div>
+      <div id="recipe-list"></div>
     </div>
   </section>
 
-  <!-- Recipe Cards -->
-  <section class="recipes">
-    <div class="container" id="recipe-list">
-  </section>
   <!-- Recipe Modal -->
 <div id="recipe-modal" class="modal">
   <div class="modal-content" id="modal-content">

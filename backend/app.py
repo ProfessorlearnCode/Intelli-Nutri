@@ -3,7 +3,7 @@ main.py - Flask App Entry Point
 
 Define all main routes here:
 - /save_preferences (POST): Accepts user dietary data
-- /get_recipes (POSTGET): Returns recipes based on user prefs or search query
+- /recipes_load (POSTGET): Returns recipes based on user prefs or search query
 - /chat (POST): Receives chat input and returns response from AI
 
 Other files like llm_utils.py or db_utils.py will be imported and used here.
@@ -12,6 +12,7 @@ Other files like llm_utils.py or db_utils.py will be imported and used here.
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import db_utils as d
+import vector_utils as v
 
 app = Flask(__name__)
 CORS(app, origins="https://laughing-space-waddle-4j7wgxr5rvpwcg55-5500.app.github.dev")
@@ -40,7 +41,6 @@ def save_preferences():
         return jsonify({"status" : 0,
                 "message": "[🔴 ERROR] Exception during preferences saving"}), 500
 
-
 @app.route("/recipes_load")
 def recipes_load():
     try:
@@ -55,6 +55,22 @@ def recipes_load():
             "status": 0,
             "message": "[🔴 ERROR] Exception during recipe loading"
         }), 500
+
+@app.route("/smart_search", methods=["POST"])
+def similarity_search():
+    try:
+        data = request.get_json()
+        query = data.get("query", "")
+        print("Received query:", query)
+
+        results = v.similar_search(query, 4)
+        return jsonify({"status": 1, "recipes": results}), 200
+        
+    except Exception as e:
+        print("Server error:", str(e)) 
+        return jsonify({"status" : 0,
+                "message": f"[🔴 ERROR] Exception during preferences saving {e}"}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

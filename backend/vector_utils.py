@@ -191,19 +191,19 @@ def similar_search(query, k=5):
         print("[ERROR 🔴] Error occurred while performing similarity search.")    
 
 # === Manual Test Block ===
-if __name__ == "__main__":
-    # build_index()
+# if __name__ == "__main__":
+#     # build_index()
 
-    print("\n🔎 Testing Search:")
+#     print("\n🔎 Testing Search:")
     
-    query = "Easy non-vegetarian recipes"
-    results = similar_search(query, 5)
-
-    for i, recipe in enumerate(results, 1):
-        print(f"\n#{i}: {recipe['recipe_name']}")
-        print(f"    cooktime: {recipe['recipe_cooktime']}")
-        print(f"    course: {recipe['recipe_course_type']}")
-        print(f"    difficulty: {recipe['recipe_difficulty']}")
-        print(f"    flavours: {recipe['recipe_flavor_profile']}")
-        print(f"    Diet: {recipe['recipe_diet_type']}")
+#     query = "Easy non-vegetarian recipes"
+#     results = similar_search(query, 5)
+#     print(results)
+    # for i, recipe in enumerate(results, 1):
+    #     print(f"\n#{i}: {recipe['recipe_name']}")
+    #     print(f"    cooktime: {recipe['recipe_cooktime']}")
+    #     print(f"    course: {recipe['recipe_course_type']}")
+    #     print(f"    difficulty: {recipe['recipe_difficulty']}")
+    #     print(f"    flavours: {recipe['recipe_flavor_profile']}")
+    #     print(f"    Diet: {recipe['recipe_diet_type']}")
 
