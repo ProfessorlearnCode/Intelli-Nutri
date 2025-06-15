@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function getBotResponse(input, user) {
     try {
-      const response = await fetch("/chat", {
+      const response = await fetch("https://laughing-space-waddle-4j7wgxr5rvpwcg55-5000.app.github.dev/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -62,53 +62,3 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
-  /* -------------------------
-     4. Chatbot Page Logic
-  -------------------------- */
-  document.addEventListener('DOMContentLoaded', function () {
-  const chatForm = document.getElementById("chat-form");
-  const chatWindow = document.getElementById("chat-window");
-  const userInput = document.getElementById("user-input");
-
-  if (chatForm && chatWindow && userInput) {
-    chatForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const message = userInput.value.trim();
-      if (!message) return;
-
-      appendMessage("user", message);
-
-      setTimeout(() => {
-        const botResponse = getBotResponse(message);
-        appendMessage("bot", botResponse);
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-      }, 600);
-
-      userInput.value = "";
-    });
-
-    function appendMessage(sender, text) {
-      const messageElement = document.createElement("div");
-      messageElement.className = `message ${sender}`;
-      messageElement.textContent = text;
-      chatWindow.appendChild(messageElement);
-    }
-
-    function getBotResponse(input) {
-      const lowerInput = input.toLowerCase();
-      if (lowerInput.includes("vegan")) {
-        return "Try a Vegan Chickpea Curry or Quinoa Salad!";
-      } else if (lowerInput.includes("diabetic")) {
-        return "Low-carb Grilled Chicken or Steamed Veggie Stir Fry are great options.";
-      } else if (lowerInput.includes("breakfast")) {
-        return "How about oatmeal with berries or an egg-white omelet?";
-      } else if (lowerInput.includes("gluten")) {
-        return "Gluten-free Pasta Primavera or Brown Rice Bowls work well.";
-      } else {
-        return "Tell me more — what kind of recipe are you looking for (e.g. high protein, low carb)?";
-      }
-    }
-  }
-});

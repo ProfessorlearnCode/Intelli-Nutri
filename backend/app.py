@@ -71,6 +71,20 @@ def similarity_search():
         return jsonify({"status" : 0,
                 "message": f"[🔴 ERROR] Exception during preferences saving {e}"}), 500
 
+@app.route("/chat", methods=["POST", "GET"])
+def chat():
+    data = request.get_json()
+    user_message = data.get('message', '')
+    user = data.get('user', 'User')
+
+    if not user_message:
+        return jsonify({'reply': '⚠️ Please send a valid message.'}), 400
+
+    # For now, just echo back the message
+    reply = f"👨‍🍳 Hi {user}, you said: '{user_message}'"
+    
+    return jsonify({'reply': reply})
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
