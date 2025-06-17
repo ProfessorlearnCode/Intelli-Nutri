@@ -1,21 +1,16 @@
-"""
-main.py - Flask App Entry Point
-
-Define all main routes here:
-- /save_preferences (POST): Accepts user dietary data
-- /recipes_load (POSTGET): Returns recipes based on user prefs or search query
-- /chat (POST): Receives chat input and returns response from AI
-
-Other files like llm_utils.py or db_utils.py will be imported and used here.
-"""
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 import db_utils as d
 import vector_utils as v
 
 app = Flask(__name__)
+webport = os.getenv("FRONTEND_CODESPACE")
+flaskport = os.getenv("FLASK_PORT")
 CORS(app, origins="https://laughing-space-waddle-4j7wgxr5rvpwcg55-5500.app.github.dev")
+
+API = os.getenv("API_KEY")
 
 @app.route("/")
 def server_health():
@@ -85,6 +80,5 @@ def chat():
     
     return jsonify({'reply': reply})
 
-
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=flaskport)
