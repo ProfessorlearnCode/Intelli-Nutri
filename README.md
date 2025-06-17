@@ -52,7 +52,7 @@ intelligent-nutri/
 
 ### 1. Clone the Repo
 ```bash
-git clone https://github.com/your-username/intelligent-nutri.git
+git clone https://github.com/professorlearncode/intelli-nutri.git
 cd intelligent-nutri
 ```
 
