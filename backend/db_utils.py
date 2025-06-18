@@ -43,6 +43,19 @@ def fetch_user_prefs(user_id):
     else:
         print("[ERROR 🔴] Error occurred while connecting to the DB for fetching user preferences.")
         return []
+    
+def fetch_user_id():
+    status, connect_obj = build_connection()
+    if status == 1:
+        query = 'SELECT MAX(Id) AS id FROM user_preferences'
+        row = connect_obj.execute(query).fetchone()
+        connect_obj.close()
+
+        return dict(row)  # Now returns {'id': 18}
+    else:
+        print("[ERROR 🔴] Error occurred while connecting to the DB for fetching user preferences.")
+        return {}
+
 
 def fetch_recipes_by_id(ids):
     status, connect_obj = build_connection()
@@ -92,6 +105,6 @@ def fetch_tables():
         print("[ERROR 🔴] Error occurred while connecting to the DB for fetching tables.")
         return []
 
-# if __name__ == "__main__":
-#     data = json.dumps(fetch_recipes_for_indexing(), indent= 4)
-#     print(data)
+if __name__ == "__main__":
+    pref_context = fetch_user_prefs(17)[0]
+    print(pref_context)
