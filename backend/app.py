@@ -6,7 +6,7 @@ import vector_utils as v
 import llm_utils as l
 
 app = Flask(__name__)
-CORS(app, origins="https://laughing-space-waddle-4j7wgxr5rvpwcg55-5500.app.github.dev")
+CORS(app)
 
 client = l.client
 SELECTED_MODEL_ID = "gemini-2.0-flash-exp"
